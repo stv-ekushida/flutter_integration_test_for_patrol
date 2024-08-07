@@ -1,10 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_pilot_test/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 
 void main() {
-  patrolTest('demo', (PatrolIntegrationTester $) async {
+  const nativeConfig =
+      NativeAutomatorConfig(bundleId: 'com.example.flutterPilotTest');
+
+  patrolTest('demo',
+      nativeAutomatorConfig: nativeConfig,
+      framePolicy: LiveTestWidgetsFlutterBindingFramePolicy.fullyLive,
+      (PatrolIntegrationTester $) async {
     await $.pumpWidgetAndSettle(const MyApp());
 
     expect(
